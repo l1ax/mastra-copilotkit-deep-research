@@ -1,7 +1,6 @@
 import { createWorkflow } from '@mastra/core';
-import { generateResearchTopic, generateQuery, webSearch, reflection } from './steps';
+import { generateResearchTopic, generateQuery, webSearchAndReflection } from './steps';
 import { z } from 'zod';
-import {webSearchAndReflection} from './steps/webSearchAndReflection';
 
 export const deepResearch = createWorkflow({
     id: 'deepResearch',
