@@ -23,18 +23,7 @@ export const generateQuery = createStep({
         const currentDate = getCurrentDate();
 
         const prompt = generateQueriesPrompt.format(researchTopic, currentDate, 3);
-        // const agent = mastra.getAgent('defaultAgent');
-        // const response = await agent.generate(
-        //     prompt,
-        //     {
-        //         structuredOutput: {
-        //             schema: z.object({
-        //                 queries: z.array(z.string())
-        //             }),
-        //             jsonPromptInjection: true
-        //         },
-        //     }
-        // );
+
         const response: OpenAI.Chat.Completions.ChatCompletion = await llm.invoke({
             messages: prompt,
             model: 'deepseek-chat',

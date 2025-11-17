@@ -5,7 +5,7 @@
 import { createStep } from '@mastra/core';
 import { z } from 'zod';
 import {generateResearchTopicPrompt} from '../../../prompt';
-import {mastra} from '../../..';
+import {llm} from '../../../llm';
 
 export const generateResearchTopic = createStep({
     id: 'generateResearchTopic',
@@ -18,20 +18,17 @@ export const generateResearchTopic = createStep({
     execute: async ({ inputData }): Promise<{ researchTopic: string }> => {
         const { userInput } = inputData;
         const prompt = generateResearchTopicPrompt.format(userInput);
-        const agent = mastra.getAgent('defaultAgent');
-        const response = await agent.generate(
-            prompt,
-            {
-                structuredOutput: {
-                    schema: z.object({
-                        researchTopic: z.string()
-                    }),
-                    jsonPromptInjection: true,
-                },
-            }
-        );
+
+        const response = await llm.invoke({
+            messages: prompt,
+            model: 'deepseek-chat',
+            response_format: {
+                type: 'json_object',
+            },
+        })
         
-        const researchTopic = response.object.researchTopic;
+        const content = response.choices[0].message.content || '{}';
+        const researchTopic = JSON.parse(content).researchTopic;
 
         return {
             researchTopic,

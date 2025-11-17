@@ -4,6 +4,7 @@ import { z } from 'zod';
 
 export const deepResearch = createWorkflow({
     id: 'deepResearch',
+    description: 'a workflow to perform deep research based on user input',
     inputSchema: z.object({
         userInput: z.string(),
     }),

@@ -3,9 +3,9 @@ import { OpenAI } from 'openai';
 class LLM {
     openai: OpenAI;
 
-    constructor() {
+    constructor(apiKey: string) {
         this.openai = new OpenAI({
-            apiKey: process.env.DEEPSEEK_API_KEY,
+            apiKey,
             baseURL: 'https://api.deepseek.com',
         });
     }
@@ -15,4 +15,4 @@ class LLM {
     }
 }
 
-export const llm = new LLM();
+export const llm = new LLM(process.env.DEEPSEEK_API_KEY!);

@@ -1,10 +1,10 @@
 import { Mastra } from "@mastra/core/mastra";
-import {defaultAgent} from './agent';
+import {deepResearchAgent} from './agent';
 import {deepResearch} from './workflow';
 
 export const mastra = new Mastra({
     agents: {
-        defaultAgent
+        deepResearchAgent
     },
     workflows: {
         deepResearch

@@ -1,7 +1,7 @@
-import {MessageListInput} from '@mastra/core/agent/message-list';
+import OpenAI from 'openai';
 
 class GenerateResearchTopicPrompt {
-    format(userInput: string): MessageListInput {
+    format(userInput: string): OpenAI.Chat.Completions.ChatCompletionMessageParam[] {
         const prompt = `
             Your goal is to generate a research topic based on the user's input.
 
