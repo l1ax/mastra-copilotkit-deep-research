@@ -17,6 +17,12 @@ export const generateQuery = createStep({
     outputSchema: z.object({
         queries: z.array(z.string()).describe('web search queries'),
     }),
+    stateSchema: z.object({
+        chatHistory: z.array(z.object({
+            role: z.enum(['user', 'assistant']),
+            content: z.string(),
+        })).describe('对话历史，用于多轮对话'),
+    }),
     execute: async ({ inputData }): Promise<{ queries: string[] }> => {
         const {researchTopic} = inputData;
 

@@ -72,6 +72,12 @@ export const webSearchAndReflection = createStep({
     outputSchema: z.object({
         answer: z.string()
     }),
+    stateSchema: z.object({
+        chatHistory: z.array(z.object({
+            role: z.enum(['user', 'assistant']),
+            content: z.string(),
+        })).describe('对话历史，用于多轮对话'),
+    }),
     execute: async ({ inputData }) => {
         const { queries, researchTopic } = inputData;
 
